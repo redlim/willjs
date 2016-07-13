@@ -13,4 +13,4 @@ Ejemplos en :
 
     Login : login.html
     Registro : register.html
-    repeat : repeat.html
+    repeat + show + hide + redirect : repeat.html
