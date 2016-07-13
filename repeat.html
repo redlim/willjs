@@ -1,5 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+<style>
+    .active{
+        opacity: 1;
+    }
+    .inactive{
+        opacity: 0.3;
+    }
+</style>
 <head>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -15,19 +23,19 @@
         </div>
         <div class="main-login main-center">
             <script id="challenge-active" type="text">
-                <div class="portfolio-item">
+                <div class="portfolio-item inactive">
                     <div class="portfolio-box">
                         <div class="portfolio-image-wrap">
-                            <img src="{{image}}" alt="{{description}}"/>
+                            <img src="{{image}}" alt="{{description}}" class="img-responsive img-circle"/>
                         </div>
                     </div>
                 </div>
             </script>
             <script id="challenge-inactive" type="text">
-                <div class="portfolio-item">
+                <div class="portfolio-item active">
                     <div class="portfolio-box">
                         <div class="portfolio-image-wrap">
-                            <img src="{{image}}" alt="{{description}}"/>
+                            <img src="{{image}}" alt="{{description}}" class="img-responsive img-circle"/>
                         </div>
                     </div>
                 </div>
