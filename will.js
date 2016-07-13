@@ -1,6 +1,10 @@
 var JSGymFront = (function () {
 
-    function HTTP(method, url, body, token, callback) {
+    function HTTP(request, callback) {
+        var method = request.method;
+        var url = request.url;
+        var body = request.body || null;
+        var token = request.token || null;
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (xhttp.readyState == 4) {
@@ -29,29 +33,35 @@ var JSGymFront = (function () {
 
      */
     function singIn(url, newUser, callback) {
-
-        HTTP('POST', url, newUser, null, function (err, res) {
-            if (res) {
-                callback(err, res);
-            } else {
-                callback("error al crear el usuario")
-            }
-        })
+        
+        HTTP({
+            method:'POST',
+            url: url,
+            body: newUser}, 
+            function (err, res) {
+                if (res) {
+                    callback(err, res);
+                } else {
+                    callback("error al crear el usuario")
+                }
+            })
     }
 
     function login(url, credentials, callback) {
 
-        HTTP('POST', url, {usr: credentials.usr, pwd: credentials.pwd}, null,function (err, res) {
-            console.log(err,res);
-            if (res) {
-                localStorage.setItem("token", res.token);
-                callback(err, res);
-            } else {
-                callback("Usuario o contraseña incorrecta", res);
-            }
-
-        });
-
+        HTTP({
+            method:'POST', 
+            url:url, 
+            body:{usr: credentials.usr, pwd: credentials.pwd}}, 
+            function (err, res) {
+                console.log(err,res);
+                if (res) {
+                    localStorage.setItem("token", res.token);
+                    callback(err, res);
+                } else {
+                    callback("Usuario o contraseña incorrecta", res);
+                }
+            });
     }
 
     function logout() {
@@ -81,8 +91,9 @@ var JSGymFront = (function () {
 
     function render (data) {
          
-        HTTP(data.action.method,data.action.uri,"",null,function (err,res) {
-           
+        HTTP({method:data.action.method,
+            url:data.action.uri
+        }, function (err,res) {
             res = [];
             res.push({image :'https://67.media.tumblr.com/avatar_7d19825164bc_128.png',description :"Bob Esponja",active:true});
             res.push({image :'https://pbs.twimg.com/profile_images/733785689414852608/KyP2BtO5.jpg',description :"Calamardo",active:false});
@@ -91,7 +102,6 @@ var JSGymFront = (function () {
                 var container = $(data.target.container);
                 var templateInactive = $(data.target.template.inactive)[0].innerHTML;
                 var templateActive = $(data.target.template.active)[0].innerHTML;
-                console.log(templateActive);
                 res.forEach(function (d) {
                     var newItem;
                     if(d.active){

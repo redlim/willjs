@@ -83,15 +83,15 @@
                 });
     }
 
-    var isLogin =JSGymFront.isLogged(); // sería la función para pasar a show;
     function show() {
         JSGymFront.show('#my-challenge',function () {return true;})
     }
     function hide() {
         JSGymFront.show('#my-challenge',function () {return false;})
     }
+
     function go() {
-        JSGymFront.go({success:'login.html',fail:'register.html'},function () { return false;})
+        JSGymFront.go({success:'login.html',fail:'register.html'},JSGymFront.isLogged)
     }
 </script>
 </html>
