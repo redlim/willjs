@@ -1,0 +1,20 @@
+{
+  "name": "hackathonmasdificil",
+  "authors": [
+    "Will <wolmos@m4v.es>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "mustache.js": "mustache#^2.2.1"
+  }
+}

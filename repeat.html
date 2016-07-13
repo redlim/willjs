@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <div class="row main">
+        <div class="panel-heading">
+            <div class="panel-title text-center">
+                <h1 class="title">Repeat</h1>
+                <hr />
+            </div>
+        </div>
+        <div class="main-login main-center">
+            <script id="challenge-active" type="text">
+                <div class="portfolio-item">
+                    <div class="portfolio-box">
+                        <div class="portfolio-image-wrap">
+                            <img src="{{image}}" alt="{{description}}"/>
+                        </div>
+                    </div>
+                </div>
+            </script>
+            <script id="challenge-inactive" type="text">
+                <div class="portfolio-item">
+                    <div class="portfolio-box">
+                        <div class="portfolio-image-wrap">
+                            <img src="{{image}}" alt="{{description}}"/>
+                        </div>
+                    </div>
+                </div>
+            </script>
+            <div id="my-challenge">
+
+            </div>
+            <div>
+                <button type="button" onclick="repeat()" class="btn btn-primary btn-lg btn-lg login-button">Repeat</button>
+            </div>
+            <div>
+                <button type="button" onclick="show()" class="btn btn-primary btn-lg btn-lg login-button">Show</button>
+            </div>
+            <div>
+                <button type="button" onclick="hide()" class="btn btn-primary btn-lg btn-lg login-button">Hide</button>
+            </div>
+            <div>
+                <button type="button" onclick="go()" class="btn btn-primary btn-lg btn-lg login-button">Go to login</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/mustache.js/mustache.js"></script>
+<script type="text/javascript" src="will.js">
+</script>
+<script>
+    function repeat() {
+        JSGymFront.render(
+                {
+                    action: {
+                        uri: 'http://app.hackmasdificil.com/api/jobs/',
+                        method: 'get'
+                    },
+                    target: {
+                        container: '#my-challenge',
+                        template: {
+                            size: 9,
+                            active: '#challenge-active',
+                            inactive: '#challenge-inactive'
+                        }
+                    }
+                });
+    }
+
+    var isLogin =JSGymFront.isLogged(); // sería la función para pasar a show;
+    function show() {
+        JSGymFront.show('#my-challenge',function () {return true;})
+    }
+    function hide() {
+        JSGymFront.show('#my-challenge',function () {return false;})
+    }
+    function go() {
+        JSGymFront.go({success:'login.html',fail:'register.html'},function () { return false;})
+    }
+</script>
+</html>
