@@ -56,14 +56,11 @@
 <script>
     function login(h) {
         var user = {};
-        user.usr = $('#username').val();
+        user.login = $('#username').val();
         user.pwd = $('#password').val();
         JSGymFront.login('http://app.hackmasdificil.com/api/login',user,function (err,res) {
-            if(!err){
-                console.log("usuario creado correctamente")
-            } else{
-                console.log("tienes los dedos muy gordos, teclea de nuevo!")
-            }
+
+            JSGymFront.go({success:'repeat.html',fail:'register.html'},function () {return !err; })
         });
     }
 </script>

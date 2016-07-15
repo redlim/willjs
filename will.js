@@ -4,7 +4,7 @@ var JSGymFront = (function () {
         var method = request.method;
         var url = request.url;
         var body = request.body || null;
-        var token = request.token || null;
+        var token = localStorage.getItem('token') || null;
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (xhttp.readyState == 4) {
@@ -52,11 +52,11 @@ var JSGymFront = (function () {
         HTTP({
             method:'POST', 
             url:url, 
-            body:{usr: credentials.usr, pwd: credentials.pwd}}, 
+            body:credentials},
             function (err, res) {
                 console.log(err,res);
                 if (res) {
-                    localStorage.setItem("token", res.token);
+                    localStorage.setItem("token", res.outcome['x-token']);
                     callback(err, res);
                 } else {
                     callback("Usuario o contraseña incorrecta", res);
